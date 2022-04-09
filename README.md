@@ -425,10 +425,41 @@ The training set is given in Figure 1. Check out the accuracy of a training and 
 Build and evaluate decision trees in terms of max depth, min samples split, and min samples leaf. 
 
 ```
-import pandas as pdfrom sklearn.tree import DecisionTreeClassifier import numpy as npfrom sklearn.model_selection import train_test_splitfrom sklearn.ensemble import AdaBoostClassifier, RandomForestClassifier
+import pandas as pd
+from sklearn.tree import DecisionTreeClassifier 
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import AdaBoostClassifier, RandomForestClassifier
 
-df=pd.read_csv("./dstest.txt" , delimiter=',',names=["class", "x", 'y'])data=df.valuesX_train, X_test, y_train, y_test=train_test_split(data[:,1:],data[:,0],test_size=0.2, random_state=0)
-print("min_sample_split_test")for i in range(200,401, 100):    dt_clf=DecisionTreeClassifier(min_samples_split=i, random_state=0)    dt_clf.fit(X_train,y_train)    pred=dt_clf.predict(X_test)    accuracy=np.mean(y_test==pred)    precision=precision_score(y_test,pred)    recall=recall_score(y_test,pred)    print("min_samples_split={0} ,accuracy=, {1:0.3f}, precsion={2:0.3f}, recall={3:0.3f}".format(i,accuracy,precision,recall))print("min_sample_leaf_test")for i in range(50,251,50):    dt_clf=DecisionTreeClassifier(min_samples_leaf=i, random_state=0)    dt_clf.fit(X_train,y_train)    pred=dt_clf.predict(X_test)    accuracy=np.mean(y_test==pred)    precision=precision_score(y_test,pred)    recall=recall_score(y_test,pred)    print("min_samples_leaf={0} ,accuracy=, {1:0.3f}, precsion={2:0.3f}, recall={3:0.3f}".format(i, accuracy, precision,recall))print("max_depth_test")for i in range(1,7,1):    dt_clf = DecisionTreeClassifier(max_depth=i, random_state=0)    dt_clf.fit(X_train, y_train)    pred = dt_clf.predict(X_test)    accuracy = np.mean(y_test == pred)    precision=precision_score(y_test,pred)    recall=recall_score(y_test,pred)    print("max_depth={0} ,accuracy=, {1:0.3f}, precsion={2:0.3f}, recall={3:0.3f}".format(i,accuracy,precision,recall))
+df=pd.read_csv("./dstest.txt" , delimiter=',',names=["class", "x", 'y'])
+data=df.values
+X_train, X_test, y_train, y_test=train_test_split(data[:,1:],data[:,0],test_size=0.2, random_state=0)
+
+print("min_sample_split_test")
+for i in range(200,401, 100):    
+dt_clf=DecisionTreeClassifier(min_samples_split=i, random_state=0) 
+dt_clf.fit(X_train,y_train)    
+pred=dt_clf.predict(X_test)    
+accuracy=np.mean(y_test==pred)   
+precision=precision_score(y_test,pred)    
+recall=recall_score(y_test,pred)    
+print("min_samples_split={0} ,accuracy=, {1:0.3f}, precsion={2:0.3f}, recall={3:0.3f}".format(i,accuracy,precision,recall))
+print("min_sample_leaf_test")for i in range(50,251,50):   
+dt_clf=DecisionTreeClassifier(min_samples_leaf=i, random_state=0)    
+dt_clf.fit(X_train,y_train) 
+pred=dt_clf.predict(X_test)  
+accuracy=np.mean(y_test==pred)  
+precision=precision_score(y_test,pred)  
+recall=recall_score(y_test,pred)  
+print("min_samples_leaf={0} ,accuracy=, {1:0.3f}, precsion={2:0.3f}, recall={3:0.3f}".format(i, accuracy, precision,recall))
+print("max_depth_test")for i in range(1,7,1):   
+dt_clf = DecisionTreeClassifier(max_depth=i, random_state=0)  
+dt_clf.fit(X_train, y_train)  
+pred = dt_clf.predict(X_test)
+accuracy = np.mean(y_test == pred)  
+precision=precision_score(y_test,pred)   
+recall=recall_score(y_test,pred)   
+print("max_depth={0} ,accuracy=, {1:0.3f}, precsion={2:0.3f}, recall={3:0.3f}".format(i,accuracy,precision,recall))
 ```
 
 * result
@@ -437,68 +468,150 @@ print("min_sample_split_test")for i in range(200,401, 100):    dt_clf=DecisionTr
 
 * Tree form
 
-  + min_samples_split=400
+* + min_samples_split=400
 
 ![image](https://user-images.githubusercontent.com/26988563/162414901-3411f111-973b-4b2f-9e42-d55f7d0386c5.png)
 
-  + min_samples_split=300
+* + min_samples_split=300
 
 ![image](https://user-images.githubusercontent.com/26988563/162414911-2c439802-5d23-4d9e-bb1f-d32588a0b808.png)
 
-  + min_samples_split=200
+* + min_samples_split=200
 
 ![image](https://user-images.githubusercontent.com/26988563/162414936-95024ac6-5320-423e-9dd6-ee66f65edc2f.png)
 
-  + min_samples_leaf=50
+* + min_samples_leaf=50
 
 ![image](https://user-images.githubusercontent.com/26988563/162414952-1bb1db73-d95b-4c8e-a0c6-acdb1320b207.png)
 
-  + min_samples_leaf=100
+* + min_samples_leaf=100
   
 ![image](https://user-images.githubusercontent.com/26988563/162414971-af2bd938-5a85-4146-931d-2e3087d9d22e.png)
 
-  + min_samples_leaf=150
+* + min_samples_leaf=150
 
 ![image](https://user-images.githubusercontent.com/26988563/162415007-c10748e3-7e48-4f80-94da-4528813753ff.png)
 
-  + min_samples_leaf=200
+* + min_samples_leaf=200
 
 ![image](https://user-images.githubusercontent.com/26988563/162415025-443ec1e8-3ffa-4507-a084-04651cebb8b4.png)
 
-  + min_samples_leaf=250
+* + min_samples_leaf=250
 
 ![image](https://user-images.githubusercontent.com/26988563/162415044-c059a8ba-5963-43ad-950c-50c275110de8.png)
 
-  + max_deapth=1
+* + max_deapth=1
 
 ![image](https://user-images.githubusercontent.com/26988563/162415060-142b99c8-58b2-44e9-9f33-da06de622cf0.png)
 
-  + max_depth=2
+* + max_depth=2
 
 ![image](https://user-images.githubusercontent.com/26988563/162415070-64bb154b-08ec-41c6-9042-8a45e5b7015c.png)
 
-  + max_depth=3
+* + max_depth=3
 
 ![image](https://user-images.githubusercontent.com/26988563/162415089-32c3ecf2-08fb-4a26-94f8-d049b709a1f3.png)
 
-  + max_depth=4
+* + max_depth=4
 
 ![image](https://user-images.githubusercontent.com/26988563/162415110-6e3c7372-d865-49fe-aeb6-250b8376acbb.png)
 
-  + max_depth=5
+* + max_depth=5
 
 ![image](https://user-images.githubusercontent.com/26988563/162415123-bc8fbfb5-35dc-48b7-9524-cec88c67846c.png)
 
-  + max_depth=6
+* + max_depth=6
 
 ![image](https://user-images.githubusercontent.com/26988563/162415139-79969330-39b9-493c-aeb9-89827cc09806.png)
 
+According to Result, the greater the depth of the tree(max_depth), the smaller the minimum number of samples (min_samples_split) to divide the node, the smaller the minimum number of samples (min_samples_leaf) to become the leaf node, the more accurate the tree is to predict.
 
+##### Build and evaluate an AdaBoost ensemble where max depth is 2 and n_estimators varies from 10 to 50 in 5 increments.
+
+* Code
+
+```
+for i in range(10,51,5):   
+dt_clf=DecisionTreeClassifier(max_depth=2, random_state=0) 
+ada_clf=AdaBoostClassifier(base_estimator=dt_clf,n_estimators=i,learning_rate=0.1,random_state=0)   
+ada_clf.fit(X_train,y_train)   
+pred=ada_clf.predict(X_test)  
+accuracy=np.mean(y_test==pred) 
+precision=precision_score(y_test,pred) 
+recall=recall_score(y_test,pred);  
+print("n_esimators={0} ,accuracy=, {1:0.3f}, precsion={2:0.3f}, recall={3:0.3f}".format(i,accuracy,precision,recall))
+```
+
+* Result
 
 ![image](https://user-images.githubusercontent.com/26988563/162415212-9d6e4d49-83e3-4946-b779-927720e5a1bf.png)
+
+According to the results, Adaboost ensemble models show accuracy, precsion, and recall more than Decision
+
+##### Build and evaluate a random forest ensemble where max depth is 2 and n_estimators varies from 10 to 50 in 5 increments.
+
+* Code
+
+```
+for i in range(10,51,5): 
+rdf_clf=RandomForestClassifier(max_depth=2, n_estimators=i)  
+rdf_clf.fit(X_train,y_train)  
+pred=rdf_clf.predict(X_test) 
+accuracy=np.mean(y_test==pred)  
+precision=precision_score(y_test,pred)  
+recall=recall_score(y_test,pred)   
+print("n_esimators={0} ,accuracy=, {1:0.3f}, precsion={2:0.3f}, recall={3:0.3f}".format(i, accuracy, precision, recall))
+```
+
+* Result
+
 ![image](https://user-images.githubusercontent.com/26988563/162415240-b4be901b-86a7-453e-bd6e-6fb773b8f12e.png)
+
+According to the results, Random forest models show accuracy, precsion, and recall more than Decision, but less than Adaboost model
+
+##### Discuss the results between decision tree and ensemble model.
+
+If the maximum height of the decision tree is the same as the tree used in ensemble model, Ensemble models perform better in prediction, recall and precision than decision trees
+
+## Generic procedure for building a decision tree.
+
+1. Start at the top of the tree
+2. Grow it by splitting attributes one by one to determine which attribute to split, look at node impurity
+3. Assign leaf nodes the majority vote in the leaf
+4. When getting to the bottom, prune the tree to prevent overfitting
+
+##### Discuss the advantages and drawbacks of decision tree applications for solving real-world problems.
+
+* Advantage
+
+1. Make and interpret simple
+2. Can be very powerful 
+3. Can be as complex as you need them
+4. Non-parametric method
+5. Handle both nominal and numeric attributes
+
+* Drawback
+
+1. Over-sensitive to the training set, irrelevant attribute or noisy data
+2. Use the divide and conquer method
+3. Tend to partition the data into smaller fragments
+
+## Draw a decision tree
+using information gain IG(X) from Table 1. The decision tree is based on the pseudo code.
+
 ![image](https://user-images.githubusercontent.com/26988563/162415300-aac62fa2-90e6-489a-bcf7-ff24574ec35a.png)
+
+S1. Start from empty decision tree
+
+S2. Split on the best attribute selected by computing
+
 ![image](https://user-images.githubusercontent.com/26988563/162415313-06468e3c-437a-4eb5-b743-e9e2362bf539.png)
+
+S3. Do S2 until the termination condition is met
+
+Therefore, split Table 1 on . The following table is then created:
+
+* Split Table 1 on(=T)
 
 <HTML xmlns="http://www.w3.org/TR/REC-html40" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word"><HEAD><META charset="utf-8" content="text/html" http-equiv="Content-Type"/><!--[if !mso]>
 <style>
@@ -508,9 +621,11 @@ w\:* {behavior:url(#default#VML);}
 .shape {behavior:url(#default#VML);}
 </style>
 <![endif]
---><STYLE><!--p.0
+--><!--p.0
 {mso-style-name:"Normal";line-height:570%;margin-left:0.0pt;margin-right:0.0pt;text-indent:0.0pt;margin-top:0.0pt;margin-bottom:10.0pt;text-align:justify;word-break:break-hangul;layout-grid-mode:both;vertical-align:baseline;mso-pagination:none;text-autospace:none;mso-padding-alt:0.0pt 0.0pt 0.0pt 0.0pt;mso-font-width:100%;letter-spacing:0.0pt;mso-text-raise:0.0pt;font-size:10.0pt;color:#000000;mso-font-kerning:1.0pt;}
---></STYLE></HEAD><BODY><!--StartFragment--><P class="0" style="line-height:160%;margin-bottom:0.0pt;mso-pagination:none;text-autospace:none;mso-padding-alt:0.0pt 0.0pt 0.0pt 0.0pt;"><TABLE style="border-collapse:collapse;border-top:solid #0a0000 0.56pt;border-left:solid #0a0000 0.56pt;border-bottom:solid #0a0000 0.56pt;border-right:solid #0a0000 0.56pt;background:#ffffff;margin-left:121.95ptmso-table-overlap:never;"><TR><TD style="width:31.65pt;height:12.25pt;padding:1.41pt 5.10pt 1.41pt 5.10pt;border-top:solid #0a0000 0.56pt;border-left:solid #0a0000 0.56pt;border-bottom:solid #0a0000 0.56pt;border-right:solid #0a0000 0.56pt;background:#ffffff;" valign="top"><P class="0" style="line-height:100%;margin-bottom:0.0pt;text-align:center;mso-pagination:none;text-autospace:none;mso-padding-alt:0.0pt 0.0pt 0.0pt 0.0pt;"><SPAN lang="EN-US" style="font-family:맑은 고딕;mso-font-width:100%;letter-spacing:0.0pt;mso-text-raise:0.0pt;font-size:8.0pt;">X</SPAN><SPAN lang="EN-US" style="font-family:맑은 고딕;mso-font-width:100%;letter-spacing:0.0pt;mso-text-raise:0.0pt;font-size:8.0pt;vertical-align:sub;">1</SPAN></P></TD><TD style="width:29.90pt;height:12.25pt;padding:1.41pt 5.10pt 1.41pt 5.10pt;border-top:solid #0a0000 0.56pt;border-left:solid #0a0000 0.56pt;border-bottom:solid #0a0000 0.56pt;border-right:solid #0a0000 0.56pt;background:#ffffff;" valign="top"><P class="0" style="line-height:100%;margin-bottom:0.0pt;text-align:center;mso-pagination:none;text-autospace:none;mso-padding-alt:0.0pt 0.0pt 0.0pt 0.0pt;"><SPAN lang="EN-US" style="font-family:맑은 고딕;mso-font-width:100%;letter-spacing:0.0pt;mso-text-raise:0.0pt;font-size:8.0pt;">X</SPAN><SPAN lang="EN-US" style="font-family:맑은 고딕;mso-font-width:100%;letter-spacing:0.0pt;mso-text-raise:0.0pt;font-size:8.0pt;vertical-align:sub;">2</SPAN></P></TD><TD style="width:29.90pt;height:12.25pt;padding:1.41pt 5.10pt 1.41pt 5.10pt;border-top:solid #0a0000 0.56pt;border-left:solid #0a0000 0.56pt;border-bottom:solid #0a0000 0.56pt;border-right:solid #0a0000 0.56pt;background:#ffffff;" valign="top"><P class="0" style="line-height:100%;margin-bottom:0.0pt;text-align:center;mso-pagination:none;text-autospace:none;mso-padding-alt:0.0pt 0.0pt 0.0pt 0.0pt;"><SPAN lang="EN-US" style="font-family:맑은 고딕;mso-font-width:100%;letter-spacing:0.0pt;mso-text-raise:0.0pt;font-size:8.0pt;">Y</SPAN></P></TD></TR><TR><TD style="width:31.65pt;height:12.25pt;padding:1.41pt 5.10pt 1.41pt 5.10pt;border-top:solid #0a0000 0.56pt;border-left:solid #0a0000 0.56pt;border-bottom:solid #0a0000 0.56pt;border-right:solid #0a0000 0.56pt;background:#ffffff;" valign="top"><P class="0" style="line-height:100%;margin-bottom:0.0pt;text-align:center;mso-pagination:none;text-autospace:none;mso-padding-alt:0.0pt 0.0pt 0.0pt 0.0pt;"><SPAN lang="EN-US" style="font-family:맑은 고딕;mso-font-width:100%;letter-spacing:0.0pt;mso-text-raise:0.0pt;font-size:8.0pt;">T</SPAN></P></TD><TD style="width:29.90pt;height:12.25pt;padding:1.41pt 5.10pt 1.41pt 5.10pt;border-top:solid #0a0000 0.56pt;border-left:solid #0a0000 0.56pt;border-bottom:solid #0a0000 0.56pt;border-right:solid #0a0000 0.56pt;background:#ffffff;" valign="top"><P class="0" style="line-height:100%;margin-bottom:0.0pt;text-align:center;mso-pagination:none;text-autospace:none;mso-padding-alt:0.0pt 0.0pt 0.0pt 0.0pt;"><SPAN lang="EN-US" style="font-family:맑은 고딕;mso-font-width:100%;letter-spacing:0.0pt;mso-text-raise:0.0pt;font-size:8.0pt;">T</SPAN></P></TD><TD style="width:29.90pt;height:12.25pt;padding:1.41pt 5.10pt 1.41pt 5.10pt;border-top:solid #0a0000 0.56pt;border-left:solid #0a0000 0.56pt;border-bottom:solid #0a0000 0.56pt;border-right:solid #0a0000 0.56pt;background:#ffffff;" valign="top"><P class="0" style="line-height:100%;margin-bottom:0.0pt;text-align:center;mso-pagination:none;text-autospace:none;mso-padding-alt:0.0pt 0.0pt 0.0pt 0.0pt;"><SPAN lang="EN-US" style="font-family:맑은 고딕;mso-font-width:100%;letter-spacing:0.0pt;mso-text-raise:0.0pt;font-size:8.0pt;">F</SPAN></P></TD></TR><TR><TD style="width:31.65pt;height:12.25pt;padding:1.41pt 5.10pt 1.41pt 5.10pt;border-top:solid #0a0000 0.56pt;border-left:solid #0a0000 0.56pt;border-bottom:solid #0a0000 0.56pt;border-right:solid #0a0000 0.56pt;background:#ffffff;" valign="top"><P class="0" style="line-height:100%;margin-bottom:0.0pt;text-align:center;mso-pagination:none;text-autospace:none;mso-padding-alt:0.0pt 0.0pt 0.0pt 0.0pt;"><SPAN lang="EN-US" style="font-family:맑은 고딕;mso-font-width:100%;letter-spacing:0.0pt;mso-text-raise:0.0pt;font-size:8.0pt;">T</SPAN></P></TD><TD style="width:29.90pt;height:12.25pt;padding:1.41pt 5.10pt 1.41pt 5.10pt;border-top:solid #0a0000 0.56pt;border-left:solid #0a0000 0.56pt;border-bottom:solid #0a0000 0.56pt;border-right:solid #0a0000 0.56pt;background:#ffffff;" valign="top"><P class="0" style="line-height:100%;margin-bottom:0.0pt;text-align:center;mso-pagination:none;text-autospace:none;mso-padding-alt:0.0pt 0.0pt 0.0pt 0.0pt;"><SPAN lang="EN-US" style="font-family:맑은 고딕;mso-font-width:100%;letter-spacing:0.0pt;mso-text-raise:0.0pt;font-size:8.0pt;">F</SPAN></P></TD><TD style="width:29.90pt;height:12.25pt;padding:1.41pt 5.10pt 1.41pt 5.10pt;border-top:solid #0a0000 0.56pt;border-left:solid #0a0000 0.56pt;border-bottom:solid #0a0000 0.56pt;border-right:solid #0a0000 0.56pt;background:#ffffff;" valign="top"><P class="0" style="line-height:100%;margin-bottom:0.0pt;text-align:center;mso-pagination:none;text-autospace:none;mso-padding-alt:0.0pt 0.0pt 0.0pt 0.0pt;"><SPAN lang="EN-US" style="font-family:맑은 고딕;mso-font-width:100%;letter-spacing:0.0pt;mso-text-raise:0.0pt;font-size:8.0pt;">F</SPAN></P></TD></TR><TR><TD style="width:31.65pt;height:4.65pt;padding:1.41pt 5.10pt 1.41pt 5.10pt;border-top:solid #0a0000 0.56pt;border-left:solid #0a0000 0.56pt;border-bottom:solid #0a0000 0.56pt;border-right:solid #0a0000 0.56pt;background:#ffffff;" valign="top"><P class="0" style="line-height:100%;margin-bottom:0.0pt;text-align:center;mso-pagination:none;text-autospace:none;mso-padding-alt:0.0pt 0.0pt 0.0pt 0.0pt;"><SPAN lang="EN-US" style="font-family:맑은 고딕;font-size:8.0pt;"> </SPAN><SPAN lang="EN-US" style="font-family:맑은 고딕;mso-font-width:100%;letter-spacing:0.0pt;mso-text-raise:0.0pt;font-size:8.0pt;">F</SPAN></P></TD><TD style="width:29.90pt;height:4.65pt;padding:1.41pt 5.10pt 1.41pt 5.10pt;border-top:solid #0a0000 0.56pt;border-left:solid #0a0000 0.56pt;border-bottom:solid #0a0000 0.56pt;border-right:solid #0a0000 0.56pt;background:#ffffff;" valign="top"><P class="0" style="line-height:100%;margin-bottom:0.0pt;text-align:center;mso-pagination:none;text-autospace:none;mso-padding-alt:0.0pt 0.0pt 0.0pt 0.0pt;"><SPAN lang="EN-US" style="font-family:맑은 고딕;mso-font-width:100%;letter-spacing:0.0pt;mso-text-raise:0.0pt;font-size:8.0pt;">T</SPAN></P></TD><TD style="width:29.90pt;height:4.65pt;padding:1.41pt 5.10pt 1.41pt 5.10pt;border-top:solid #0a0000 0.56pt;border-left:solid #0a0000 0.56pt;border-bottom:solid #0a0000 0.56pt;border-right:solid #0a0000 0.56pt;background:#ffffff;" valign="top"><P class="0" style="line-height:100%;margin-bottom:0.0pt;text-align:center;mso-pagination:none;text-autospace:none;mso-padding-alt:0.0pt 0.0pt 0.0pt 0.0pt;"><SPAN lang="EN-US" style="font-family:맑은 고딕;mso-font-width:100%;letter-spacing:0.0pt;mso-text-raise:0.0pt;font-size:8.0pt;">F</SPAN></P></TD></TR><TR><TD style="width:31.65pt;height:4.65pt;padding:1.41pt 5.10pt 1.41pt 5.10pt;border-top:solid #0a0000 0.56pt;border-left:solid #0a0000 0.56pt;border-bottom:solid #0a0000 0.56pt;border-right:solid #0a0000 0.56pt;background:#ffffff;" valign="top"><P class="0" style="line-height:100%;margin-bottom:0.0pt;text-align:center;mso-pagination:none;text-autospace:none;mso-padding-alt:0.0pt 0.0pt 0.0pt 0.0pt;"><SPAN lang="EN-US" style="font-family:맑은 고딕;mso-font-width:100%;letter-spacing:0.0pt;mso-text-raise:0.0pt;font-size:8.0pt;">F</SPAN></P></TD><TD style="width:29.90pt;height:4.65pt;padding:1.41pt 5.10pt 1.41pt 5.10pt;border-top:solid #0a0000 0.56pt;border-left:solid #0a0000 0.56pt;border-bottom:solid #0a0000 0.56pt;border-right:solid #0a0000 0.56pt;background:#ffffff;" valign="top"><P class="0" style="line-height:100%;margin-bottom:0.0pt;text-align:center;mso-pagination:none;text-autospace:none;mso-padding-alt:0.0pt 0.0pt 0.0pt 0.0pt;"><SPAN lang="EN-US" style="font-family:맑은 고딕;mso-font-width:100%;letter-spacing:0.0pt;mso-text-raise:0.0pt;font-size:8.0pt;">F</SPAN></P></TD><TD style="width:29.90pt;height:4.65pt;padding:1.41pt 5.10pt 1.41pt 5.10pt;border-top:solid #0a0000 0.56pt;border-left:solid #0a0000 0.56pt;border-bottom:solid #0a0000 0.56pt;border-right:solid #0a0000 0.56pt;background:#ffffff;" valign="top"><P class="0" style="line-height:100%;margin-bottom:0.0pt;text-align:center;mso-pagination:none;text-autospace:none;mso-padding-alt:0.0pt 0.0pt 0.0pt 0.0pt;"><SPAN lang="EN-US" style="font-family:맑은 고딕;mso-font-width:100%;letter-spacing:0.0pt;mso-text-raise:0.0pt;font-size:8.0pt;">T</SPAN></P></TD></TR></TABLE></P><!--EndFragment--></BODY></HTML>
+--></HEAD><BODY><!--StartFragment--><P class="0" style="line-height:160%;margin-bottom:0.0pt;mso-pagination:none;text-autospace:none;mso-padding-alt:0.0pt 0.0pt 0.0pt 0.0pt;"><TABLE style="border-collapse:collapse;border-top:solid #0a0000 0.56pt;border-left:solid #0a0000 0.56pt;border-bottom:solid #0a0000 0.56pt;border-right:solid #0a0000 0.56pt;background:#ffffff;margin-left:121.95ptmso-table-overlap:never;"><TR><TD style="width:31.65pt;height:12.25pt;padding:1.41pt 5.10pt 1.41pt 5.10pt;border-top:solid #0a0000 0.56pt;border-left:solid #0a0000 0.56pt;border-bottom:solid #0a0000 0.56pt;border-right:solid #0a0000 0.56pt;background:#ffffff;" valign="top"><P class="0" style="line-height:100%;margin-bottom:0.0pt;text-align:center;mso-pagination:none;text-autospace:none;mso-padding-alt:0.0pt 0.0pt 0.0pt 0.0pt;"><SPAN lang="EN-US" style="font-family:맑은 고딕;mso-font-width:100%;letter-spacing:0.0pt;mso-text-raise:0.0pt;font-size:8.0pt;">X</SPAN><SPAN lang="EN-US" style="font-family:맑은 고딕;mso-font-width:100%;letter-spacing:0.0pt;mso-text-raise:0.0pt;font-size:8.0pt;vertical-align:sub;">1</SPAN></P></TD><TD style="width:29.90pt;height:12.25pt;padding:1.41pt 5.10pt 1.41pt 5.10pt;border-top:solid #0a0000 0.56pt;border-left:solid #0a0000 0.56pt;border-bottom:solid #0a0000 0.56pt;border-right:solid #0a0000 0.56pt;background:#ffffff;" valign="top"><P class="0" style="line-height:100%;margin-bottom:0.0pt;text-align:center;mso-pagination:none;text-autospace:none;mso-padding-alt:0.0pt 0.0pt 0.0pt 0.0pt;"><SPAN lang="EN-US" style="font-family:맑은 고딕;mso-font-width:100%;letter-spacing:0.0pt;mso-text-raise:0.0pt;font-size:8.0pt;">X</SPAN><SPAN lang="EN-US" style="font-family:맑은 고딕;mso-font-width:100%;letter-spacing:0.0pt;mso-text-raise:0.0pt;font-size:8.0pt;vertical-align:sub;">2</SPAN></P></TD><TD style="width:29.90pt;height:12.25pt;padding:1.41pt 5.10pt 1.41pt 5.10pt;border-top:solid #0a0000 0.56pt;border-left:solid #0a0000 0.56pt;border-bottom:solid #0a0000 0.56pt;border-right:solid #0a0000 0.56pt;background:#ffffff;" valign="top"><P class="0" style="line-height:100%;margin-bottom:0.0pt;text-align:center;mso-pagination:none;text-autospace:none;mso-padding-alt:0.0pt 0.0pt 0.0pt 0.0pt;"><SPAN lang="EN-US" style="font-family:맑은 고딕;mso-font-width:100%;letter-spacing:0.0pt;mso-text-raise:0.0pt;font-size:8.0pt;">Y</SPAN></P></TD></TR><TR><TD style="width:31.65pt;height:12.25pt;padding:1.41pt 5.10pt 1.41pt 5.10pt;border-top:solid #0a0000 0.56pt;border-left:solid #0a0000 0.56pt;border-bottom:solid #0a0000 0.56pt;border-right:solid #0a0000 0.56pt;background:#ffffff;" valign="top"><P class="0" style="line-height:100%;margin-bottom:0.0pt;text-align:center;mso-pagination:none;text-autospace:none;mso-padding-alt:0.0pt 0.0pt 0.0pt 0.0pt;"><SPAN lang="EN-US" style="font-family:맑은 고딕;mso-font-width:100%;letter-spacing:0.0pt;mso-text-raise:0.0pt;font-size:8.0pt;">T</SPAN></P></TD><TD style="width:29.90pt;height:12.25pt;padding:1.41pt 5.10pt 1.41pt 5.10pt;border-top:solid #0a0000 0.56pt;border-left:solid #0a0000 0.56pt;border-bottom:solid #0a0000 0.56pt;border-right:solid #0a0000 0.56pt;background:#ffffff;" valign="top"><P class="0" style="line-height:100%;margin-bottom:0.0pt;text-align:center;mso-pagination:none;text-autospace:none;mso-padding-alt:0.0pt 0.0pt 0.0pt 0.0pt;"><SPAN lang="EN-US" style="font-family:맑은 고딕;mso-font-width:100%;letter-spacing:0.0pt;mso-text-raise:0.0pt;font-size:8.0pt;">T</SPAN></P></TD><TD style="width:29.90pt;height:12.25pt;padding:1.41pt 5.10pt 1.41pt 5.10pt;border-top:solid #0a0000 0.56pt;border-left:solid #0a0000 0.56pt;border-bottom:solid #0a0000 0.56pt;border-right:solid #0a0000 0.56pt;background:#ffffff;" valign="top"><P class="0" style="line-height:100%;margin-bottom:0.0pt;text-align:center;mso-pagination:none;text-autospace:none;mso-padding-alt:0.0pt 0.0pt 0.0pt 0.0pt;"><SPAN lang="EN-US" style="font-family:맑은 고딕;mso-font-width:100%;letter-spacing:0.0pt;mso-text-raise:0.0pt;font-size:8.0pt;">F</SPAN></P></TD></TR><TR><TD style="width:31.65pt;height:12.25pt;padding:1.41pt 5.10pt 1.41pt 5.10pt;border-top:solid #0a0000 0.56pt;border-left:solid #0a0000 0.56pt;border-bottom:solid #0a0000 0.56pt;border-right:solid #0a0000 0.56pt;background:#ffffff;" valign="top"><P class="0" style="line-height:100%;margin-bottom:0.0pt;text-align:center;mso-pagination:none;text-autospace:none;mso-padding-alt:0.0pt 0.0pt 0.0pt 0.0pt;"><SPAN lang="EN-US" style="font-family:맑은 고딕;mso-font-width:100%;letter-spacing:0.0pt;mso-text-raise:0.0pt;font-size:8.0pt;">T</SPAN></P></TD><TD style="width:29.90pt;height:12.25pt;padding:1.41pt 5.10pt 1.41pt 5.10pt;border-top:solid #0a0000 0.56pt;border-left:solid #0a0000 0.56pt;border-bottom:solid #0a0000 0.56pt;border-right:solid #0a0000 0.56pt;background:#ffffff;" valign="top"><P class="0" style="line-height:100%;margin-bottom:0.0pt;text-align:center;mso-pagination:none;text-autospace:none;mso-padding-alt:0.0pt 0.0pt 0.0pt 0.0pt;"><SPAN lang="EN-US" style="font-family:맑은 고딕;mso-font-width:100%;letter-spacing:0.0pt;mso-text-raise:0.0pt;font-size:8.0pt;">F</SPAN></P></TD><TD style="width:29.90pt;height:12.25pt;padding:1.41pt 5.10pt 1.41pt 5.10pt;border-top:solid #0a0000 0.56pt;border-left:solid #0a0000 0.56pt;border-bottom:solid #0a0000 0.56pt;border-right:solid #0a0000 0.56pt;background:#ffffff;" valign="top"><P class="0" style="line-height:100%;margin-bottom:0.0pt;text-align:center;mso-pagination:none;text-autospace:none;mso-padding-alt:0.0pt 0.0pt 0.0pt 0.0pt;"><SPAN lang="EN-US" style="font-family:맑은 고딕;mso-font-width:100%;letter-spacing:0.0pt;mso-text-raise:0.0pt;font-size:8.0pt;">F</SPAN></P></TD></TR><TR><TD style="width:31.65pt;height:4.65pt;padding:1.41pt 5.10pt 1.41pt 5.10pt;border-top:solid #0a0000 0.56pt;border-left:solid #0a0000 0.56pt;border-bottom:solid #0a0000 0.56pt;border-right:solid #0a0000 0.56pt;background:#ffffff;" valign="top"><P class="0" style="line-height:100%;margin-bottom:0.0pt;text-align:center;mso-pagination:none;text-autospace:none;mso-padding-alt:0.0pt 0.0pt 0.0pt 0.0pt;"><SPAN lang="EN-US" style="font-family:맑은 고딕;font-size:8.0pt;"> </SPAN><SPAN lang="EN-US" style="font-family:맑은 고딕;mso-font-width:100%;letter-spacing:0.0pt;mso-text-raise:0.0pt;font-size:8.0pt;">F</SPAN></P></TD><TD style="width:29.90pt;height:4.65pt;padding:1.41pt 5.10pt 1.41pt 5.10pt;border-top:solid #0a0000 0.56pt;border-left:solid #0a0000 0.56pt;border-bottom:solid #0a0000 0.56pt;border-right:solid #0a0000 0.56pt;background:#ffffff;" valign="top"><P class="0" style="line-height:100%;margin-bottom:0.0pt;text-align:center;mso-pagination:none;text-autospace:none;mso-padding-alt:0.0pt 0.0pt 0.0pt 0.0pt;"><SPAN lang="EN-US" style="font-family:맑은 고딕;mso-font-width:100%;letter-spacing:0.0pt;mso-text-raise:0.0pt;font-size:8.0pt;">T</SPAN></P></TD><TD style="width:29.90pt;height:4.65pt;padding:1.41pt 5.10pt 1.41pt 5.10pt;border-top:solid #0a0000 0.56pt;border-left:solid #0a0000 0.56pt;border-bottom:solid #0a0000 0.56pt;border-right:solid #0a0000 0.56pt;background:#ffffff;" valign="top"><P class="0" style="line-height:100%;margin-bottom:0.0pt;text-align:center;mso-pagination:none;text-autospace:none;mso-padding-alt:0.0pt 0.0pt 0.0pt 0.0pt;"><SPAN lang="EN-US" style="font-family:맑은 고딕;mso-font-width:100%;letter-spacing:0.0pt;mso-text-raise:0.0pt;font-size:8.0pt;">F</SPAN></P></TD></TR><TR><TD style="width:31.65pt;height:4.65pt;padding:1.41pt 5.10pt 1.41pt 5.10pt;border-top:solid #0a0000 0.56pt;border-left:solid #0a0000 0.56pt;border-bottom:solid #0a0000 0.56pt;border-right:solid #0a0000 0.56pt;background:#ffffff;" valign="top"><P class="0" style="line-height:100%;margin-bottom:0.0pt;text-align:center;mso-pagination:none;text-autospace:none;mso-padding-alt:0.0pt 0.0pt 0.0pt 0.0pt;"><SPAN lang="EN-US" style="font-family:맑은 고딕;mso-font-width:100%;letter-spacing:0.0pt;mso-text-raise:0.0pt;font-size:8.0pt;">F</SPAN></P></TD><TD style="width:29.90pt;height:4.65pt;padding:1.41pt 5.10pt 1.41pt 5.10pt;border-top:solid #0a0000 0.56pt;border-left:solid #0a0000 0.56pt;border-bottom:solid #0a0000 0.56pt;border-right:solid #0a0000 0.56pt;background:#ffffff;" valign="top"><P class="0" style="line-height:100%;margin-bottom:0.0pt;text-align:center;mso-pagination:none;text-autospace:none;mso-padding-alt:0.0pt 0.0pt 0.0pt 0.0pt;"><SPAN lang="EN-US" style="font-family:맑은 고딕;mso-font-width:100%;letter-spacing:0.0pt;mso-text-raise:0.0pt;font-size:8.0pt;">F</SPAN></P></TD><TD style="width:29.90pt;height:4.65pt;padding:1.41pt 5.10pt 1.41pt 5.10pt;border-top:solid #0a0000 0.56pt;border-left:solid #0a0000 0.56pt;border-bottom:solid #0a0000 0.56pt;border-right:solid #0a0000 0.56pt;background:#ffffff;" valign="top"><P class="0" style="line-height:100%;margin-bottom:0.0pt;text-align:center;mso-pagination:none;text-autospace:none;mso-padding-alt:0.0pt 0.0pt 0.0pt 0.0pt;"><SPAN lang="EN-US" style="font-family:맑은 고딕;mso-font-width:100%;letter-spacing:0.0pt;mso-text-raise:0.0pt;font-size:8.0pt;">T</SPAN></P></TD></TR></TABLE></P><!--EndFragment--></BODY></HTML>
+
+* Split Table 1 on(=F)
 
 <HTML xmlns="http://www.w3.org/TR/REC-html40" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word"><HEAD><META charset="utf-8" content="text/html" http-equiv="Content-Type"/><!--[if !mso]>
 <style>
